@@ -13,6 +13,7 @@ import { LetterOnlyDirective } from './letter-only.directive';
 import { NumberOnlyDirective } from './number-only.directive';
 import { ClientService } from './client.service';
 import { CatalogComponent } from './catalog/catalog.component';
+import { SearchBarComponent } from './search-bar/search-bar.component';
 
 @NgModule({
   declarations: [
@@ -25,6 +26,7 @@ import { CatalogComponent } from './catalog/catalog.component';
     LetterOnlyDirective,
     NumberOnlyDirective,
     CatalogComponent,
+    SearchBarComponent,
   ],
   imports: [BrowserModule, FormsModule, ReactiveFormsModule, HttpClientModule],
   providers: [ClientService],

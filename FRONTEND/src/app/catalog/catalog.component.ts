@@ -19,30 +19,21 @@ import { Product } from '../core/model/product';
 })
 export class CatalogComponent implements OnInit {
   filterer: string = '';
-  public catalogObservable$: Observable<any>;
-  filteredCatalog: Product[] = [];
+  catalog: Product[] = [];
   subscription: Subscription;
   constructor(public clientService: ClientService) {
-    this.catalogObservable$ = this.clientService.getCatalogue().pipe(
-      map((products) => {
-        return products.filter((product) =>
-          product.name.toLowerCase().includes(this.filterer.toLowerCase())
-        );
-      })
-    );
-    this.subscription = this.subscribe();
+    this.subscription = this.getCatalog();
   }
 
   ngOnInit(): void {}
 
-  subscribe(): Subscription {
-    return this.catalogObservable$.subscribe((products) => {
-      this.filteredCatalog = products;
+  getCatalog(): Subscription {
+    return this.clientService.getCatalogue().subscribe((products) => {
+      this.catalog = products;
     });
   }
-  updateProducts(): void {
-    this.subscription.unsubscribe();
-    this.subscribe();
+  updateProducts(products: Product[]) {
+    this.catalog = products;
   }
   ngOnDestroy(): void {
     this.subscription.unsubscribe();
